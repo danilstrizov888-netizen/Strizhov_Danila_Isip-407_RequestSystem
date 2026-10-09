@@ -19,4 +19,6 @@ Thumbs.db
 *.db
 *.sqlite3
 .env
-secrets.txt
+secrets.txtdesktop.ini
+*.sqbpro
+desktop.ini
