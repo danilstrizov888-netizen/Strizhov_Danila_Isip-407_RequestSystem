@@ -44,19 +44,33 @@ RequestSystem/
 
 │   │   └── components.png
 
-│   └── ui/
+│   ├── ui/
 
-│       ├── README.md
+│   │   ├── README.md
 
-│       ├── login.png
+│   │   ├── login.png
 
-│       ├── tickets.png
+│   │   ├── tickets.png
 
-│       ├── create_ticket.png
+│   │   ├── create_ticket.png
 
-│       ├── ticket_card.png
+│   │   ├── ticket_card.png
 
-│       └── edit_ticket.png
+│   │   └── edit_ticket.png
+
+│   └── db/
+
+│       ├── schema.sql
+
+│       ├── seed.sql
+
+│       ├── queries.sql
+
+│       ├── requests.db
+
+│       ├── er_diagram.png
+
+│       └── screenshots/
 
 ├── src/
 
@@ -78,11 +92,15 @@ RequestSystem/
 
 [Прототип интерфейса](docs/ui/README.md)
 
+[База данных](docs/db/schema.sql)
+
 ---
 
    Технологии
 
 Python 3.12+
+
+SQLite (БД)
 
 Git / GitHub
 
@@ -104,4 +122,6 @@ Markdown — для документации
 
 ✅ Лабораторная работа №4 — завершена.
 
-⬜ Лабораторная работа №5 — выполняется.
+✅ Лабораторная работа №5 — завершена.
+
+⬜ Лабораторная работа №6 — выполняется. 
