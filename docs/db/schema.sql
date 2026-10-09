@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 -- Создание таблиц
 
 CREATE TABLE Roles (
