@@ -1,21 +1,22 @@
+from src.models.ticket import Ticket
+
+
 class TicketService:
     def __init__(self, ticket_repo):
         self.ticket_repo = ticket_repo
 
     def create_ticket(self, title, description, category_id, author_id):
-        # Валидация
         if not title or len(title.strip()) == 0:
             raise ValueError("Тема не может быть пустой")
         if len(title) > 200:
             raise ValueError("Тема слишком длинная")
 
-        from src.models.ticket import Ticket
         ticket = Ticket(
             id=None,
             title=title.strip(),
             description=description.strip(),
             category_id=category_id,
-            status_id=1,  # Новая
+            status_id=1,
             author_id=author_id
         )
         return self.ticket_repo.create(ticket)
@@ -30,8 +31,25 @@ class TicketService:
         return ticket
 
     def change_status(self, ticket_id, status_id):
-        self.get_by_id(ticket_id)  # проверка существования
+        self.get_by_id(ticket_id)
         self.ticket_repo.update_status(ticket_id, status_id)
+
+    def assign_executor(self, ticket_id, assignee_id):
+        self.get_by_id(ticket_id)
+        self.ticket_repo.update_assignee(ticket_id, assignee_id)
+
+    def update_ticket(self, ticket_id, title, description):
+        if not title or len(title.strip()) == 0:
+            raise ValueError("Тема не может быть пустой")
+        if len(title) > 200:
+            raise ValueError("Тема слишком длинная")
+        self.get_by_id(ticket_id)
+        self.ticket_repo.update(ticket_id, title.strip(), description.strip())
+
+    def delete_ticket(self, ticket_id):
+        self.get_by_id(ticket_id)
+        self.ticket_repo.delete(ticket_id)
+
     def search(self, query):
         if not query or len(query.strip()) == 0:
             raise ValueError("Поисковый запрос не может быть пустым")

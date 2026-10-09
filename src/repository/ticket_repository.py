@@ -6,24 +6,36 @@ class TicketRepository:
     def __init__(self, db_path):
         self.db_path = db_path
 
-    def get_all(self):
+    def _get_connection(self):
         conn = sqlite3.connect(self.db_path)
+        conn.execute("PRAGMA foreign_keys = ON")
+        return conn
+
+    def get_all(self):
+        conn = self._get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Requests")
+        cursor.execute(
+            "SELECT id, title, description, category_id, status_id, "
+            "author_id, assignee_id FROM Requests"
+        )
         rows = cursor.fetchall()
         conn.close()
         return [Ticket(*row) for row in rows]
 
     def get_by_id(self, ticket_id):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM Requests WHERE id = ?", (ticket_id,))
+        cursor.execute(
+            "SELECT id, title, description, category_id, status_id, "
+            "author_id, assignee_id FROM Requests WHERE id = ?",
+            (ticket_id,)
+        )
         row = cursor.fetchone()
         conn.close()
         return Ticket(*row) if row else None
 
     def create(self, ticket):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(
             "INSERT INTO Requests (title, description, category_id, status_id, author_id) "
@@ -37,7 +49,7 @@ class TicketRepository:
         return ticket
 
     def update_status(self, ticket_id, status_id):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(
             "UPDATE Requests SET status_id = ? WHERE id = ?",
@@ -46,18 +58,40 @@ class TicketRepository:
         conn.commit()
         conn.close()
 
-    def delete(self, ticket_id):
-        conn = sqlite3.connect(self.db_path)
+    def update_assignee(self, ticket_id, assignee_id):
+        conn = self._get_connection()
         cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE Requests SET assignee_id = ? WHERE id = ?",
+            (assignee_id, ticket_id)
+        )
+        conn.commit()
+        conn.close()
+
+    def update(self, ticket_id, title, description):
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE Requests SET title = ?, description = ? WHERE id = ?",
+            (title, description, ticket_id)
+        )
+        conn.commit()
+        conn.close()
+
+    def delete(self, ticket_id):
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM Comments WHERE request_id = ?", (ticket_id,))
         cursor.execute("DELETE FROM Requests WHERE id = ?", (ticket_id,))
         conn.commit()
         conn.close()
+
     def search(self, query):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT id, title, description, category_id, status_id, author_id, assignee_id "
-            "FROM Requests "
+            "SELECT id, title, description, category_id, status_id, "
+            "author_id, assignee_id FROM Requests "
             "WHERE title LIKE ? OR description LIKE ?",
             (f"%{query}%", f"%{query}%")
         )
@@ -66,11 +100,11 @@ class TicketRepository:
         return [Ticket(*row) for row in rows]
 
     def filter_by_status(self, status_id):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT id, title, description, category_id, status_id, author_id, assignee_id "
-            "FROM Requests WHERE status_id = ?",
+            "SELECT id, title, description, category_id, status_id, "
+            "author_id, assignee_id FROM Requests WHERE status_id = ?",
             (status_id,)
         )
         rows = cursor.fetchall()
@@ -78,11 +112,11 @@ class TicketRepository:
         return [Ticket(*row) for row in rows]
 
     def filter_by_category(self, category_id):
-        conn = sqlite3.connect(self.db_path)
+        conn = self._get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "SELECT id, title, description, category_id, status_id, author_id, assignee_id "
-            "FROM Requests WHERE category_id = ?",
+            "SELECT id, title, description, category_id, status_id, "
+            "author_id, assignee_id FROM Requests WHERE category_id = ?",
             (category_id,)
         )
         rows = cursor.fetchall()
