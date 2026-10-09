@@ -32,3 +32,13 @@ class TicketService:
     def change_status(self, ticket_id, status_id):
         self.get_by_id(ticket_id)  # проверка существования
         self.ticket_repo.update_status(ticket_id, status_id)
+    def search(self, query):
+        if not query or len(query.strip()) == 0:
+            raise ValueError("Поисковый запрос не может быть пустым")
+        return self.ticket_repo.search(query.strip())
+
+    def filter_by_status(self, status_id):
+        return self.ticket_repo.filter_by_status(status_id)
+
+    def filter_by_category(self, category_id):
+        return self.ticket_repo.filter_by_category(category_id)
