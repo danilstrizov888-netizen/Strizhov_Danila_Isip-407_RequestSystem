@@ -68,15 +68,29 @@
 
    REST API
 
-Запуск:
+Запуск локально:
 
    uvicorn src.api.main:app --reload
 
-Адрес: http://127.0.0.1:8000
+Адрес локально: http://127.0.0.1:8000
 
 Документация (Swagger): http://127.0.0.1:8000/docs
 
-Endpoints:
+### Удалённый деплой
+
+Приложение развёрнуто на Render.com:
+
+Адрес: https://strizhov-danila-isip-407-requestsystem.onrender.com
+
+Ссылки:
+
+- Swagger: https://strizhov-danila-isip-407-requestsystem.onrender.com/docs
+
+- Health: https://strizhov-danila-isip-407-requestsystem.onrender.com/health
+
+- Requests: https://strizhov-danila-isip-407-requestsystem.onrender.com/requests/
+
+### Endpoints
 
 | Метод | Путь | Назначение |
 
@@ -98,9 +112,65 @@ Endpoints:
 
 | GET | /categories/ | Категории |
 
+| GET | /health | Проверка работоспособности |
+
 Пример запроса:
 
    curl -X GET "http://127.0.0.1:8000/requests/"
+
+---
+
+   Docker
+
+Сборка образа:
+
+   docker build -t request-system .
+
+Запуск контейнера:
+
+   docker run -d -p 8000:8000 --name request-api request-system
+
+Проверка:
+
+   docker ps
+
+   curl http://127.0.0.1:8000/health
+
+---
+
+   Деплой на Render.com
+
+1. Зарегистрируйся на https://render.com.
+
+2. Подключи GitHub-репозиторий.
+
+3. Создай Web Service:
+
+   - Language: Docker
+
+   - Branch: main
+
+   - Region: Frankfurt
+
+   - Instance Type: Free
+
+4. Render автоматически соберёт Docker-образ и запустит контейнер.
+
+5. После деплоя приложение доступно по ссылке.
+
+---
+
+   Переменные окружения
+
+Файл `.env.example`:
+
+   APP_PORT=8000
+
+   DB_PATH=docs/db/requests.db
+
+Для локального запуска скопируй `.env.example` в `.env`.
+
+Файл `.env` добавлен в `.gitignore` — секреты не попадают в Git.
 
 ---
 
@@ -163,6 +233,20 @@ RequestSystem/
 │   │   ├── get_categories.png
 
 │   │   ├── error_404.png
+
+│   │   ├── health_local.png
+
+│   │   ├── docker_swagger.png
+
+│   │   ├── docker_requests.png
+
+│   │   ├── docker_ps.png
+
+│   │   ├── health_remote.png
+
+│   │   ├── swagger_remote.png
+
+│   │   ├── requests_remote.png
 
 │   │   └── curl_commands.md
 
@@ -234,6 +318,14 @@ RequestSystem/
 
 ├── tests/
 
+├── Dockerfile
+
+├── .dockerignore
+
+├── .env.example
+
+├── requirements.txt
+
 └── README.md
 
 ---
@@ -264,6 +356,10 @@ SQLite (БД)
 
 FastAPI + Uvicorn (REST API)
 
+Docker (контейнеризация)
+
+Render.com (деплой)
+
 Git / GitHub
 
 draw.io (diagrams.net) — для диаграмм
@@ -290,7 +386,7 @@ Markdown — для документации
 
 ✅ Лабораторная работа №7 — завершена.
 
-⬜ Лабораторная работа №8 — выполняется.
+✅ Лабораторная работа №8 — завершена.
 
 ⬜ Лабораторная работа №9 — выполняется.
 
