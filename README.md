@@ -76,7 +76,9 @@
 
 Документация (Swagger): http://127.0.0.1:8000/docs
 
-### Удалённый деплой
+---
+
+   Удалённый деплой
 
 Приложение развёрнуто на Render.com:
 
@@ -90,7 +92,9 @@
 
 - Requests: https://strizhov-danila-isip-407-requestsystem.onrender.com/requests/
 
-### Endpoints
+---
+
+   Endpoints
 
 | Метод | Путь | Назначение |
 
@@ -160,6 +164,47 @@
 
 ---
 
+   Тестирование
+
+---
+
+   Локальное тестирование
+
+Запуск тестов:
+
+   cd testing/lab9
+
+   cat test_plan.md
+
+   cat test_cases.md
+
+   cat bug_reports.md
+
+---
+
+   Результаты
+
+| Категория | PASS | FAIL | BLOCKED |
+|-----------|:----:|:----:|:-------:|
+| Позитивные | 9 | 1 | 0 |
+| Негативные | 3 | 1 | 0 |
+| Граничные | 4 | 0 | 0 |
+| Роли | 2 | 0 | 0 |
+| Интеграционные | 2 | 0 | 0 |
+| API | 4 | 0 | 0 |
+| Итого | 24 | 2 | 1 |
+
+---
+
+   Найденные дефекты
+
+| ID | Название | Важность |
+|----|----------|:--------:|
+| BUG-01 | FOREIGN KEY constraint failed | High |
+| BUG-02 | Database is locked | Critical |
+
+---
+
    Переменные окружения
 
 Файл `.env.example`:
@@ -216,11 +261,7 @@ RequestSystem/
 
 │   │   ├── get_requests.png
 
-│   │   ├── get_requests_filter.png
-
 │   │   ├── post_request.png
-
-│   │   ├── get_request.png
 
 │   │   ├── patch_request.png
 
@@ -236,13 +277,15 @@ RequestSystem/
 
 │   │   ├── health_local.png
 
+│   │   ├── health_remote.png
+
 │   │   ├── docker_swagger.png
 
 │   │   ├── docker_requests.png
 
 │   │   ├── docker_ps.png
 
-│   │   ├── health_remote.png
+│   │   ├── render_logs.png
 
 │   │   ├── swagger_remote.png
 
@@ -316,6 +359,20 @@ RequestSystem/
 
 │       └── __init__.py
 
+├── testing/
+
+│   └── lab9/
+
+│       ├── test_plan.md
+
+│       ├── test_cases.md
+
+│       ├── bug_reports.md
+
+│       ├── api_collection.md
+
+│       └── *.png (скриншоты)
+
 ├── tests/
 
 ├── Dockerfile
@@ -345,6 +402,12 @@ RequestSystem/
 [База данных](docs/db/schema.sql)
 
 [REST API — примеры запросов](docs/api_screenshots/curl_commands.md)
+
+[Тест-план](testing/lab9/test_plan.md)
+
+[Тест-кейсы](testing/lab9/test_cases.md)
+
+[Отчёт о дефектах](testing/lab9/bug_reports.md)
 
 ---
 
@@ -388,6 +451,8 @@ Markdown — для документации
 
 ✅ Лабораторная работа №8 — завершена.
 
-⬜ Лабораторная работа №9 — выполняется.
+✅ Лабораторная работа №9 — завершена.
 
 ⬜ Лабораторная работа №10 — выполняется.
+
+⬜ Видео — выполняется.
