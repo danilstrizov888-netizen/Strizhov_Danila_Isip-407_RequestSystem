@@ -1,0 +1,31 @@
+============================= test session starts =============================
+platform win32 -- Python 3.15.0, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\striz\AppData\Local\Programs\Python\Python315\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\striz\Videos\Strizhov_Danila_IsiP-407_RequestSystem
+plugins: anyio-4.15.1
+collecting ... collected 8 items
+
+testing/lab10/test_api.py::test_get_requests PASSED                      [ 12%]
+testing/lab10/test_api.py::test_get_nonexistent_ticket PASSED            [ 25%]
+testing/lab10/test_api.py::test_create_invalid_ticket PASSED             [ 37%]
+testing/lab10/test_business.py::test_get_all_tickets PASSED              [ 50%]
+testing/lab10/test_business.py::test_get_ticket_by_id PASSED             [ 62%]
+testing/lab10/test_business.py::test_create_ticket_validation PASSED     [ 75%]
+testing/lab10/test_regression.py::test_bug01_nonexistent_author PASSED   [ 87%]
+testing/lab10/test_regression.py::test_bug02_database_lock PASSED        [100%]
+
+============================== warnings summary ===============================
+..\..\AppData\Local\Programs\Python\Python315\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\striz\AppData\Local\Programs\Python\Python315\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+src\api\schemas.py:25
+  C:\Users\striz\Videos\Strizhov_Danila_IsiP-407_RequestSystem\src\api\schemas.py:25: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class TicketOut(BaseModel):
+
+src\api\schemas.py:38
+  C:\Users\striz\Videos\Strizhov_Danila_IsiP-407_RequestSystem\src\api\schemas.py:38: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.14/migration/
+    class UserOut(BaseModel):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 8 passed, 3 warnings in 0.74s ========================

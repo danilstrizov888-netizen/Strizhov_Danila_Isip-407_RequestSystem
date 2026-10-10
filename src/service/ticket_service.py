@@ -1,4 +1,6 @@
+import os
 from src.models.ticket import Ticket
+from src.repository.user_repository import UserRepository
 
 
 class TicketService:
@@ -6,10 +8,18 @@ class TicketService:
         self.ticket_repo = ticket_repo
 
     def create_ticket(self, title, description, category_id, author_id):
+        # Валидация темы
         if not title or len(title.strip()) == 0:
             raise ValueError("Тема не может быть пустой")
         if len(title) > 200:
             raise ValueError("Тема слишком длинная")
+
+        # Проверка автора (BUG-01 fix)
+        db_path = os.path.join("docs", "db", "requests.db")
+        user_repo = UserRepository(db_path)
+        user = user_repo.get_by_id(author_id)
+        if not user:
+            raise ValueError(f"Пользователь с id={author_id} не найден")
 
         ticket = Ticket(
             id=None,

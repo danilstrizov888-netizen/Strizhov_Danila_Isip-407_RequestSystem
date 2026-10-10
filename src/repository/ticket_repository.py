@@ -7,7 +7,8 @@ class TicketRepository:
         self.db_path = db_path
 
     def _get_connection(self):
-        conn = sqlite3.connect(self.db_path)
+        # BUG-02 fix: timeout=10 для ожидания при блокировке
+        conn = sqlite3.connect(self.db_path, timeout=10)
         conn.execute("PRAGMA foreign_keys = ON")
         return conn
 
