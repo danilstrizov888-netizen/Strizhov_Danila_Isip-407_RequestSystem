@@ -76,9 +76,7 @@
 
 Документация (Swagger): http://127.0.0.1:8000/docs
 
----
-
-   Удалённый деплой
+### Удалённый деплой
 
 Приложение развёрнуто на Render.com:
 
@@ -92,9 +90,7 @@
 
 - Requests: https://strizhov-danila-isip-407-requestsystem.onrender.com/requests/
 
----
-
-   Endpoints
+### Endpoints
 
 | Метод | Путь | Назначение |
 
@@ -164,58 +160,64 @@
 
 ---
 
-   Тестирование
+   Автоматические тесты
 
----
+Установка зависимостей:
 
-   Локальное тестирование
+   pip install pytest httpx fastapi
 
 Запуск тестов:
 
-   cd testing/lab9
+   pytest testing/lab10/ -v
 
-   cat test_plan.md
+С сохранением лога:
 
-   cat test_cases.md
+   pytest testing/lab10/ -v > testing/lab10/test_run.txt
 
-   cat bug_reports.md
+Результат: 8 тестов, все PASSED.
 
----
+### Что проверяют тесты
 
-   Результаты
+| Файл | Что проверяет |
 
-| Категория | PASS | FAIL | BLOCKED |
-|-----------|:----:|:----:|:-------:|
-| Позитивные | 9 | 1 | 0 |
-| Негативные | 3 | 1 | 0 |
-| Граничные | 4 | 0 | 0 |
-| Роли | 2 | 0 | 0 |
-| Интеграционные | 2 | 0 | 0 |
-| API | 4 | 0 | 0 |
-| Итого | 24 | 2 | 1 |
+|------|---------------|
+
+| test_api.py | API-запросы (GET, POST, 404, 422) |
+
+| test_business.py | Бизнес-логика (TicketService) |
+
+| test_regression.py | Регрессия для BUG-01 и BUG-02 |
 
 ---
 
-   Найденные дефекты
+   Ручное тестирование (лаба №9)
 
-| ID | Название | Важность |
-|----|----------|:--------:|
-| BUG-01 | FOREIGN KEY constraint failed | High |
-| BUG-02 | Database is locked | Critical |
+Каталог: testing/lab9/
+
+Документы:
+
+- test_plan.md — план тестирования
+- test_cases.md — 26 тест-кейсов
+- bug_reports.md — 2 дефекта
+- api_collection.md — коллекция API-запросов
+
+Результаты: 24 PASS, 2 FAIL, 1 BLOCKED.
+
+Показатель успешности: 92,3%.
 
 ---
 
    Переменные окружения
 
-Файл `.env.example`:
+Файл .env.example:
 
    APP_PORT=8000
 
    DB_PATH=docs/db/requests.db
 
-Для локального запуска скопируй `.env.example` в `.env`.
+Для локального запуска скопируй .env.example в .env.
 
-Файл `.env` добавлен в `.gitignore` — секреты не попадают в Git.
+Файл .env добавлен в .gitignore — секреты не попадают в Git.
 
 ---
 
@@ -361,17 +363,31 @@ RequestSystem/
 
 ├── testing/
 
-│   └── lab9/
+│   ├── lab9/
 
-│       ├── test_plan.md
+│   │   ├── test_plan.md
 
-│       ├── test_cases.md
+│   │   ├── test_cases.md
 
-│       ├── bug_reports.md
+│   │   ├── bug_reports.md
 
-│       ├── api_collection.md
+│   │   ├── api_collection.md
 
-│       └── *.png (скриншоты)
+│   │   └── *.png
+
+│   └── lab10/
+
+│       ├── test_run.txt
+
+│       ├── test_summary.md
+
+│       ├── README.md
+
+│       ├── test_api.py
+
+│       ├── test_business.py
+
+│       └── test_regression.py
 
 ├── tests/
 
@@ -409,6 +425,10 @@ RequestSystem/
 
 [Отчёт о дефектах](testing/lab9/bug_reports.md)
 
+[Автотесты](testing/lab10/README.md)
+
+[Итоговый отчёт о тестировании](testing/lab10/test_summary.md)
+
 ---
 
    Технологии
@@ -418,6 +438,8 @@ Python 3.12+
 SQLite (БД)
 
 FastAPI + Uvicorn (REST API)
+
+pytest (автотесты)
 
 Docker (контейнеризация)
 
@@ -453,6 +475,4 @@ Markdown — для документации
 
 ✅ Лабораторная работа №9 — завершена.
 
-⬜ Лабораторная работа №10 — выполняется.
-
-⬜ Видео — выполняется.
+✅ Лабораторная работа №10 — завершена.
