@@ -114,9 +114,9 @@ RequestSystem/
 
 │   ├── ai_log.md
 
-│   ├── use_case.png
-
 │   ├── ai_screenshots/
+
+│   ├── use_case.png
 
 │   ├── architecture/
 
