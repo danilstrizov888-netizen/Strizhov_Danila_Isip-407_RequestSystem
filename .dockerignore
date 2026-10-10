@@ -1,0 +1,12 @@
+.git
+.gitignore
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vscode/
+.idea/
+docs/screenshots/
+docs/ai_screenshots/
+docs/api_screenshots/
+.env

@@ -22,3 +22,6 @@ Thumbs.db
 secrets.txtdesktop.ini
 *.sqbpro
 desktop.ini
+
+# Environment
+.env

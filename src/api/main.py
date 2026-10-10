@@ -10,7 +10,6 @@ app = FastAPI(
 )
 
 
-# Единый формат ошибок
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     return JSONResponse(
@@ -19,11 +18,16 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 
-# Подключаем роутеры
 app.include_router(requests.router)
 app.include_router(users.router)
 app.include_router(statuses.router)
 app.include_router(categories.router)
+
+
+@app.get("/health", tags=["Главная"])
+def health():
+    """Проверка работоспособности."""
+    return {"status": "ok"}
 
 
 @app.get("/", tags=["Главная"])
